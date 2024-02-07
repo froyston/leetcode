@@ -1,22 +1,16 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        HashMap<Integer,Integer> seen = new HashMap<>();
-        for(int num: nums) {
-            if(!seen.containsKey(num)) {
-                seen.put(num, 1);
-            }
-            else {
-                seen.put(num, seen.get(num) + 1);
+        int maxEle = 0, maxKey = 0;
+        HashMap<Integer, Integer> elements = new HashMap<>();
+        for(int num : nums) {
+            elements.put(num , (elements.getOrDefault(num, 0) + 1));
+        }
+        for (Map.Entry<Integer, Integer> entries : elements.entrySet()) {
+            if (entries.getValue() > maxEle) {
+                maxEle = entries.getValue();
+                maxKey = entries.getKey();
             }
         }
-        
-        Map.Entry<Integer, Integer> majorityEle = null;
-        
-        for(Map.Entry<Integer, Integer> entries : seen.entrySet()) {
-            if (majorityEle == null || entries.getValue() > majorityEle.getValue()) {
-                majorityEle = entries;
-            }
-        }
-        return majorityEle.getKey();
+        return maxKey;
     }
 }
