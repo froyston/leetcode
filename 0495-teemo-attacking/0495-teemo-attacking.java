@@ -1,10 +1,20 @@
 class Solution {
     public int findPoisonedDuration(int[] timeSeries, int duration) {
-        int timePoisoned = 0;
         int n = timeSeries.length;
-        for(int i = 0; i < n - 1; i++) {
-            timePoisoned += Math.min((timeSeries[i + 1] - timeSeries[i]) , duration);
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (i == n - 1) {
+                count += duration;
+            }
+            else {
+                if (timeSeries[i] + duration - 1 < timeSeries[i + 1]) {
+                    count += duration;
+                }
+                else {
+                    count += (timeSeries[i + 1] - timeSeries[i]);
+                }
+            }
         }
-        return timePoisoned + duration;
+        return count;
     }
 }
