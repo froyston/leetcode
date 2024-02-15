@@ -4,20 +4,14 @@ class Solution {
         Map<Integer, Integer> greaterEle = new HashMap<>();
         Stack<Integer> stack = new Stack<>();
         int[] result = new int[nums1.length];
-        for(int i = nums2.length - 1; i >= 0; i--) {
-            int res = -1;
-            while (!stack.isEmpty()) {
-                int currNum = stack.peek();
-                if (currNum > nums2[i]) {
-                    res = currNum;
-                    break;
-                }
-                else {
-                    stack.pop();
-                }
+        for(int i = 0; i < nums2.length; i++) {
+            while(!stack.isEmpty() && nums2[i] > stack.peek()) {
+                greaterEle.put(stack.pop(),nums2[i]);
             }
             stack.push(nums2[i]);
-            greaterEle.put(nums2[i], res);
+        }
+        while(!stack.isEmpty()) {
+            greaterEle.put(stack.pop(), -1);
         }
         
         for (int i = 0; i < nums1.length; i++) {
