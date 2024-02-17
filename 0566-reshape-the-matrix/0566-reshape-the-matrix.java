@@ -8,18 +8,17 @@ class Solution {
         else if (row == r && column == c) {
             return mat;
         }
-        
-        List<Integer> contents = new ArrayList<>();
-        for (int[] r1 : mat) {
-            for (int c1 : r1) {
-                contents.add(c1);
-            }
-        }
-        int k = 0;
+
+        int cIndex = 0, rIndex = 0;
         int[][] newMatrix = new int[r][c];
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                newMatrix[i][j] = contents.get(k++);
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                newMatrix[rIndex][cIndex] = mat[i][j];
+                cIndex++;
+                if (cIndex == c) {
+                    rIndex++;
+                    cIndex = 0;
+                }
             }
         }
         return newMatrix;
