@@ -4,14 +4,14 @@ class Solution {
             if (n == 0) {
                 return true;
             }
-            if (flowerbed[i] == 0) {
-                boolean leftEmpty = (i == 0 || flowerbed[i - 1] == 0);
-                boolean rightEmpty = i == flowerbed.length - 1 || flowerbed[i + 1] == 0;
-                
-                if(leftEmpty && rightEmpty) {
-                    n--; 
-                    flowerbed[i] = 1;
-                }
+            if (flowerbed[i] == 1) {
+                i += 1;
+            } else if (flowerbed[i] == 0 && i == flowerbed.length -1) {
+                n --;
+                i += 1;
+            } else if (flowerbed[i] == 0 && flowerbed[i + 1] == 0){
+                n --;
+                i += 1;
             }
         }
         return (n == 0);
