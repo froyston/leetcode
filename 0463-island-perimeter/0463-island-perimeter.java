@@ -1,20 +1,16 @@
 class Solution {
     public int islandPerimeter(int[][] grid) {
-        int rows = grid.length;
-        int columns = grid[0].length;
-        
-        int up, left;
+        int up = 0, left = 0;
         int perimeter = 0;
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < columns; c++) {
-                if (grid[r][c] == 1) {
-                    perimeter += 4;
-                    if (r > 0) {
-                        perimeter = (grid[r - 1][c] == 1) ? perimeter -= 2 : perimeter;
-                    }
-                    if ( c > 0) {
-                        perimeter = (grid[r][c - 1] == 1)? perimeter -= 2 : perimeter;
-                    }
+        
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == 1) {
+                    
+                    up = (i == 0) ? 0 : grid[i - 1][j];
+                    left = (j ==0) ? 0 : grid[i][j - 1];
+                    
+                    perimeter = perimeter + 4 - (2* up) - (2* left);
                 }
             }
         }
