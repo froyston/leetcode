@@ -1,16 +1,14 @@
 class Solution {
     public String destCity(List<List<String>> paths) {
-        Map<String, String> path = new HashMap<>();
+        Set<String> hasOutGoing = new HashSet<>();
         for (int i = 0; i < paths.size(); i++) {
-            path.put(paths.get(i).get(0), paths.get(i).get(1));
+            hasOutGoing.add(paths.get(i).get(0));
         }
-        
-        String nextCity = paths.get(0).get(1);
-        String currCity = "";
-        while (!nextCity.equals("")) {
-            currCity = nextCity;
-            nextCity = path.getOrDefault(nextCity, "");
+        for (int j = 0; j < paths.size(); j++) {
+            if (!hasOutGoing.contains(paths.get(j).get(1))) {
+                return paths.get(j).get(1);
+            }
         }
-        return currCity;
+        return "";
     }
 }
